@@ -7,7 +7,7 @@ module.exports = merge({
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(less|css)$/,
         use: [  // loader解析的顺序是从下到上，从右到左的顺序
           'style-loader',  //使用MiniCssExtractPlugin时就不能使用style-loader了
           {
@@ -16,12 +16,26 @@ module.exports = merge({
               importLoaders: 2   //该方式可以让@import引入的css文件再次执行一边css打包loader
             }
           },
+          'less-loader',
         ]
       }
     ]
   },
   output: {
+    // filename: '[name].[hash:7].js',
+    // chunkFilename: '[name].[hash:7].js'
     filename: '[name].js',
     chunkFilename: '[name].js',
-  }
+  },
+  devServer: {
+    // host: '0.0.0.0',
+    port: 8085,
+    publicPath: '/',
+    hot: true,
+    disableHostCheck: true
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+  devtool: '#eval-source-map'
 }, base)

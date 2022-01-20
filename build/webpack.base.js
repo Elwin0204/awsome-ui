@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry: {
@@ -19,11 +21,35 @@ module.exports = {
           "babel-loader",
         ]
       },
-      // 处理css
-      // {
-      //   test: /\.css$/,
-      //   use: ['style-loader', 'css-loader'],
-      // },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          compilerOptions: {
+            preserveWhitespace: false
+          }
+        }
+      },
+      // 加载解析文件资源
+      {
+        test: /\.(jpg|png|gif)$/,
+        use: {
+          loader: 'url-loader', // 和file-loader功能相同，但更智能
+          options: {
+            // 配置打包后的文件名,具体可看webpack的file-loader文档
+            name: '[name].[ext]?[hash]',
+            outputPath: 'images/',
+            limit: 4096 // 当图片大小大于4k时将以文件形式输出，否则以base64输出
+          }
+        }
+      },
+      // 引入字体，svg等文件
+      {
+        test: /\.(eot|ttf|svg)$/,
+        use: {
+          loader: 'file-loader'
+        }
+      }
     ]
   },
   plugins: [
@@ -32,5 +58,17 @@ module.exports = {
       filename: 'index.html',
       favicon: path.resolve(__dirname, '../examples/favicon.ico')
     }),
-  ]
+    new ProgressBarPlugin(),
+    new VueLoaderPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      vue: {
+        compilerOptions: {
+          preserveWhitespace: false
+        }
+      }
+    })
+  ],
+  optimization: {
+    usedExports: true,
+  }
 }
