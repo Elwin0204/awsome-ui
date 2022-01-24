@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const config = require('./config');
 
 module.exports = {
   entry: {
@@ -10,6 +11,11 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
+  },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: config.alias,
+    modules: ['node_modules']
   },
   module: {
     rules: [

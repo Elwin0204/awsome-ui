@@ -1,0 +1,14 @@
+{
+  "zh-CN": {
+    "home": "Awesome - 网站快速成型工具",
+    "guide": "指南 | Awesome",
+    "component": "组件 | Awesome",
+    "resource": "资源 | Awesome"
+  },
+  "en-US": {
+    "home": "Awesome - A Desktop UI Toolkit for Web",
+    "guide": "Guide | Awesome",
+    "component": "Component | Awesome",
+    "resource": "Resource | Awesome"
+  }
+}

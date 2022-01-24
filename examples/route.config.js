@@ -83,50 +83,51 @@ const registerRoute = (navConfig) => {
   return route;
 };
 
-let route = registerRoute(navConfig);
+// let route = registerRoute(navConfig);
+let route = [];
 
 const generateMiscRoutes = function(lang) {
-  let guideRoute = {
-    path: `/${ lang }/guide`, // 指南
-    redirect: `/${ lang }/guide/design`,
-    component: load(lang, 'guide'),
-    children: [{
-      path: 'design', // 设计原则
-      name: 'guide-design' + lang,
-      meta: { lang },
-      component: load(lang, 'design')
-    }, {
-      path: 'nav', // 导航
-      name: 'guide-nav' + lang,
-      meta: { lang },
-      component: load(lang, 'nav')
-    }]
-  };
+  // let guideRoute = {
+  //   path: `/${ lang }/guide`, // 指南
+  //   redirect: `/${ lang }/guide/design`,
+  //   component: load(lang, 'guide'),
+  //   children: [{
+  //     path: 'design', // 设计原则
+  //     name: 'guide-design' + lang,
+  //     meta: { lang },
+  //     component: load(lang, 'design')
+  //   }, {
+  //     path: 'nav', // 导航
+  //     name: 'guide-nav' + lang,
+  //     meta: { lang },
+  //     component: load(lang, 'nav')
+  //   }]
+  // };
 
-  let themeRoute = {
-    path: `/${ lang }/theme`,
-    component: load(lang, 'theme-nav'),
-    children: [
-      {
-        path: '/', // 主题管理
-        name: 'theme' + lang,
-        meta: { lang },
-        component: load(lang, 'theme')
-      },
-      {
-        path: 'preview', // 主题预览编辑
-        name: 'theme-preview-' + lang,
-        meta: { lang },
-        component: load(lang, 'theme-preview')
-      }]
-  };
+  // let themeRoute = {
+  //   path: `/${ lang }/theme`,
+  //   component: load(lang, 'theme-nav'),
+  //   children: [
+  //     {
+  //       path: '/', // 主题管理
+  //       name: 'theme' + lang,
+  //       meta: { lang },
+  //       component: load(lang, 'theme')
+  //     },
+  //     {
+  //       path: 'preview', // 主题预览编辑
+  //       name: 'theme-preview-' + lang,
+  //       meta: { lang },
+  //       component: load(lang, 'theme-preview')
+  //     }]
+  // };
 
-  let resourceRoute = {
-    path: `/${ lang }/resource`, // 资源
-    meta: { lang },
-    name: 'resource' + lang,
-    component: load(lang, 'resource')
-  };
+  // let resourceRoute = {
+  //   path: `/${ lang }/resource`, // 资源
+  //   meta: { lang },
+  //   name: 'resource' + lang,
+  //   component: load(lang, 'resource')
+  // };
 
   let indexRoute = {
     path: `/${ lang }`, // 首页
@@ -135,7 +136,8 @@ const generateMiscRoutes = function(lang) {
     component: load(lang, 'index')
   };
 
-  return [guideRoute, resourceRoute, themeRoute, indexRoute];
+  // return [guideRoute, resourceRoute, themeRoute, indexRoute];
+  return [indexRoute];
 };
 
 langs.forEach(lang => {
