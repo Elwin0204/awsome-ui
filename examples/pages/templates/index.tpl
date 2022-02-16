@@ -263,8 +263,30 @@
       box-sizing: border-box;
       text-align: center;
       z-index: 100;
-      img {
-        width: 100%;
+      .envelope {
+        width: 540px;
+        height: 360px;
+        background: gray;
+        position: relative;
+        .layer-bottom {
+          position: absolute;
+          width: 540px;
+          height: 360px;
+          border-radius: 20px;
+          background: #41B883;
+        }
+        .layer-top {
+          position: absolute;
+          width: 540px;
+          height: 360px;
+          border-radius: 20px;
+          background: #2d8cf0;
+          transform:rotate(-15deg);
+          -ms-transform:rotate(-15deg); 	/* IE 9 */
+          -moz-transform:rotate(-15deg); 	/* Firefox */
+          -webkit-transform:rotate(-15deg); /* Safari 和 Chrome */
+          -o-transform:rotate(-15deg); 	/* Opera */
+        }
       }
       .intro-text {
         position: absolute;
@@ -346,34 +368,19 @@
         </li>
       </ul>
     </div>
-    <div class="theme-intro-a" v-if="showIntroA" @click="hideIntroA">
+    <div class="theme-intro-a" @click="hideIntroA">
       <div class="intro-banner">
-        <img src="~examples/assets/images/theme-intro.png" alt="">
+        <div class="envelope">
+          <div class="layer-bottom">
+          </div>
+          <div class="layer-top">
+          </div>
+        </div>
         <div class="intro-text">
           <p><%= 12 ></p>
         </div>
       </div>
       <div class="mask"></div>
-    </div>
-    <div 
-      class="theme-intro-b"
-      @click="hideIntroB"
-      v-if="showIntroB"
-    >
-      <div class="intro-banner"
-      :style="{
-        left: introBX + 'px',
-        top: introBY + 'px'
-      }"
-      >
-        <img src="~examples/assets/images/intro-theme-b.png" alt="">
-          <div class="title">
-            <div>
-              <p><%= 13 ></p>
-              <p><%= 14 ></p>
-            </div>
-          </div>
-      </div>
     </div>
   </div>
 </template>
@@ -403,9 +410,6 @@
         this.showIntroB = false;
       },
       hideIntroA() {
-        const themeTab = document.querySelector('.nav-item-theme');
-        this.introBX = themeTab.offsetLeft + (themeTab.clientWidth * 0.5) - (300 / 2);
-        this.introBY = themeTab.offsetTop + 40;
         this.showIntroA = false;
         this.showIntroB = true;
       }
